@@ -9,7 +9,8 @@ import { ListData } from '../services/listdata.service';
 export class ListsComponent implements OnInit, OnDestroy{
   lists:Array<string> = [];
   newName:string = '';
-  
+  errorDisplay = false;
+
   constructor(public listdata: ListData){}
 
   ngOnInit(): void {
@@ -21,7 +22,8 @@ export class ListsComponent implements OnInit, OnDestroy{
   }
 
   createList(){
-    this.lists.push(this.newName);
+    this.errorDisplay = (this.lists.indexOf(this.newName) != -1);
+    if (!this.errorDisplay) this.lists.push(this.newName);
     this.newName = '';
   }
 }

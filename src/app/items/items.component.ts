@@ -11,6 +11,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   listName:string = "";
   items:Array<Item> = [];
   newTask:string = '';
+  errorDisplay:boolean = false;
 
   constructor(private route: ActivatedRoute, public listdata: ListData) {}
 
@@ -24,7 +25,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   createTask() {
-    this.items.push(new Item(this.listName,this.newTask,false));
+    this.errorDisplay = (this.items.findIndex(x => x.description  == this.newTask) != -1);
+    if (!this.errorDisplay) this.items.push(new Item(this.listName,this.newTask,false));
     this.newTask = '';
   }
 

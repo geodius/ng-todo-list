@@ -4,6 +4,7 @@
         <li *ngIf="i.list==listName"> {{i.description}} <input type="checkbox" [(ngModel)]="i.complete"></li>
     </ul>
     <input [(ngModel)]="newTask" placeholder="Enter task description">
-    <button (click)="createTask()" >Add</button><br>
-    <a routerLink="/lists">Back to lists</a>
+    <button (click)="createTask()">Add</button><br>
+    <a routerLink="/lists">Back to lists</a> 
+    <div *ngIf="errorDisplay" style="color:red">Item already added to the list!</div>
 </div>

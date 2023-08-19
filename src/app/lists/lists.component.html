@@ -5,4 +5,5 @@
     </ul>
     <input [(ngModel)]="newName" placeholder="Enter list name">
     <button (click)="createList()" >Add</button>
+    <div *ngIf="errorDisplay" style="color:red">List with this name already exists!</div>
 </div>
