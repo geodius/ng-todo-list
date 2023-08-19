@@ -1,0 +1,8 @@
+<div>
+    <h2>TODO lists</h2>
+    <ul  *ngFor="let i of lists">
+        <li><a [routerLink]="['/items', i]" >{{i}} </a></li>
+    </ul>
+    <input [(ngModel)]="newName" placeholder="Enter list name">
+    <button (click)="createList()" >Add</button>
+</div>
