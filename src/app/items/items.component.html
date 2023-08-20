@@ -1,10 +1,11 @@
 <div id="todoList">
     <h2>{{listName}}</h2>
-    <ul  *ngFor="let i of items">
-        <li *ngIf="i.list==listName"> {{i.description}} <input type="checkbox" [(ngModel)]="i.complete"></li>
+    <ul  *ngFor="let i of listdata.items">
+        <li *ngIf="i.list==listName" [class.complete] ="i.complete"> {{i.description}} <input type="checkbox" [(ngModel)]="i.complete"></li>
     </ul>
     <input [(ngModel)]="newTask" placeholder="Enter task description">
-    <button (click)="createTask()">Add</button><br>
-    <a routerLink="/lists">Back to lists</a> 
+    <button (click)="createTask()">Add</button>
     <div *ngIf="errorDisplay" style="color:red">Item already added to the list!</div>
+    <br>
+    <a routerLink="/lists">Back to lists</a>
 </div>

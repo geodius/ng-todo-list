@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListData } from '../services/listdata.service';
 
@@ -7,38 +7,31 @@ import { ListData } from '../services/listdata.service';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css']
 })
-export class ItemsComponent implements OnInit, OnDestroy {
+export class ItemsComponent implements OnInit {
   listName:string = "";
-  items:Array<Item> = [];
-  newTask:string = '';
+  newTask:string = "";
   errorDisplay:boolean = false;
 
   constructor(private route: ActivatedRoute, public listdata: ListData) {}
 
   ngOnInit(): void{
-    this.listName = this.route.snapshot.paramMap.get('name') || '';
-    this.items = this.listdata.items;
-  }
-
-  ngOnDestroy() {
-    this.listdata.items = this.items;
+    this.listName = this.route.snapshot.paramMap.get('name') || "";
   }
 
   createTask() {
-    this.errorDisplay = (this.items.findIndex(x => x.description  == this.newTask) != -1);
-    if (!this.errorDisplay) this.items.push(new Item(this.listName,this.newTask,false));
+    this.errorDisplay = (!this.listdata.addToItems(new Item(this.listName,this.newTask.trim(),false)));
     this.newTask = '';
   }
-
 }
 
 export class Item{
+  list: string = '';
+  description: string = '';
+  complete: boolean = false;
+  
   constructor(list:string, description:string, complete:boolean){
     this.list = list;
     this.description = description;
     this.complete = complete;
   }
-  list: string = '';
-  description: string = '';
-  complete: boolean = false;
 }
